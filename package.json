@@ -1,0 +1,79 @@
+{
+  "name": "dualdesk",
+  "version": "1.1.0",
+  "description": "Run two accounts of WhatsApp, Instagram, Snapchat, Netflix, or Prime Video side by side in one window.",
+  "main": "main.js",
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "NODE_ENV=development electron .",
+    "dev:win": "set NODE_ENV=development && electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "pack": "electron-builder --dir",
+    "web": "node server.js"
+  },
+  "devDependencies": {
+    "electron": "28.3.3",
+    "electron-builder": "24.13.3",
+    "jimp": "^1.6.1",
+    "png-to-ico": "^3.0.2"
+  },
+  "build": {
+    "appId": "com.dualdesk.app",
+    "productName": "DualDesk",
+    "copyright": "Copyright © 2025",
+    "forceCodeSigning": false,
+    "files": [
+      "main.js",
+      "preload.js",
+      "webview-preload.js",
+      "renderer.js",
+      "index.html",
+      "styles.css",
+      "assets/**"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}.Setup.${version}.${ext}",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "sign": null,
+      "signingHashAlgorithms": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "hardenedRuntime": false
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": [
+        "AppImage"
+      ],
+      "category": "Network"
+    }
+  }
+}
